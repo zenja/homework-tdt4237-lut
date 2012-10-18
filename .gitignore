@@ -1,0 +1,17 @@
+# Generic files to ignore
+*~
+#*.lock
+*.DS_Store
+*.swp
+*.out
+
+# Vim
+.*.sw[a-z]
+*.un~
+Session.vim
+
+# Secret config files
+config/_*
+
+# test data
+/test-data
