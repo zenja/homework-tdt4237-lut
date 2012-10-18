@@ -1,0 +1,12 @@
+label {
+    display: block;
+    float: left;
+    clear: left;
+    width: 180px;   
+}
+
+legend {
+    font-weight: bold;
+    font-size: 20px;
+}
+
