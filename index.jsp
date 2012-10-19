@@ -2,7 +2,7 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
 <sql:query var="country" dataSource="jdbc/lut2">
-    SELECT full_name FROM country
+    SELECT full_name FROM Country
 </sql:query>
 
 
