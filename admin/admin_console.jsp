@@ -48,16 +48,5 @@
             </fieldset>
         </form>
 
-        <form action="add_country.jsp" method="POST" >
-            <fieldset>
-                <legend>Add Country</legend>
-                <label>Short Name:</label>
-                <input type="text" name="short_name"><br>
-                <label>Full Name:</label>
-                <input type="text" name="full_name"><br>
-                <input type="submit" >
-            </fieldset>
-        </form>
-
     </body>
 </html>

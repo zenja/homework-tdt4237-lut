@@ -25,13 +25,13 @@
     <body>
         <c:choose>
             <c:when test="${ empty userDetails }">
-                Login failed
+                Login failed<br>
+                <a href="lutadmin.jsp">back</a>
             </c:when>
             <c:otherwise>
                 <h1>Login succeeded</h1> 
                 Welcome ${ userDetails.uname}.<br> 
-                Unfortunately, there is no admin functionality here. <br>
-                You need to figure out how to tamper with the application some other way.
+                <c:redirect url="admin/admin_console.jsp"/>
             </c:otherwise>
         </c:choose>
         </body>
