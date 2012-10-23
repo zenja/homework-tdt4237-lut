@@ -6,6 +6,14 @@
 </sql:query>
 
 
+<%@page import="core.UserSession"	
+%>
+
+<% 
+	UserSession  user = (UserSession) session.getAttribute("currentUser");
+%>
+
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -42,24 +50,57 @@
             </tbody>
         </table>
         <br/>
-		<h1>User Login</h1>
-        <table border="0">
-            <thead>
-                <tr>
-                    <th>Log on here to be logged in (pretty senseless)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                    <form method="post" action="UserLoginServlet">
-                            <p>Username:</font><input type="text" name="username" size="20"></p>
-                            <p>Password:</font><input type="password" name="password" size="20"></p>
-                            <p><input type="submit" value="submit" name="login"></p>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <%
+        	if(user == null || !user.isLoggedIn() ){
+        		%>
+        		<h1>Login</h1>
+                <table border="0">
+                    <thead>
+                        <tr>
+                            <th>Log on here to be logged in</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                            <form method="post" action="UserLoginServlet">
+                                    <p>Username:</font><input type="text" name="username_j" size="20"></p>
+                                    <p>Password:</font><input type="password" name="password_j" size="20"></p>
+                                    <p><input type="submit" value="submit" name="login"></p>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                
+        		<h1>User Registration</h1>
+                <table border="0">
+                    <thead>
+                        <tr>
+                            <th>registrate user</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                            <form method="post" action="UserRegistrationServlet">
+                                    <p>Username:</font><input type="text" name="username_j" size="20"></p>
+                                    <p>Password:</font><input type="password" name="password_j" size="20"></p>
+                                    <p>Security Question:</font><input type="text" name="question" size="20"></p>
+                                    <p>Answer:</font><input type="text" name="answer" size="20"></p>
+                                    <p><input type="submit" value="submit" name="login"></p>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            		<%
+    			out.print("<p>Not logged in</p>");
+    		}else if (user.isLoggedIn()) {
+    			out.print("<p>Logged in as " + user.getUsername() + "</p>");
+    			out.print("<a href=logout.jsp>logout</a>");
+    		}
+        %>
     </body>
 </html>

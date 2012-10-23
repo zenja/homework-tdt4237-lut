@@ -45,7 +45,7 @@
             <tbody>
                 <tr>
                     <td>
-                        <form action="add_review.jsp"  method="post">
+                        <form action="addReviewServlet"  method="post">
                             <input type="hidden" name="school_id" value="${param.school_id}" />
                             <textarea name="review" rows=10 cols=60 wrap="physical" autofocus="on" > 
                             </textarea>

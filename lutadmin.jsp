@@ -18,12 +18,12 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><form method="post" action="login.jsp">
+                    <td><form method="post" action="loginServlet">
 
                             <p>
-                                Username:</font><input type="text" name="username" size="20"></p>
+                                Username:</font><input type="text" name="j_username" size="20"></p>
                             <p>
-                                Password:</font><input type="password" name="password" size="20"></p>
+                                Password:</font><input type="password" name="j_password" size="20"></p>
                             <p><input type="submit" value="submit" name="login"></p>
                         </form></td>
                 </tr>
