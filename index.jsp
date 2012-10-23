@@ -41,6 +41,25 @@
                 </tr>
             </tbody>
         </table>
-
+        <br/>
+		<h1>User Login</h1>
+        <table border="0">
+            <thead>
+                <tr>
+                    <th>Log on here to be logged in (pretty senseless)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                    <form method="post" action="UserLoginServlet">
+                            <p>Username:</font><input type="text" name="username" size="20"></p>
+                            <p>Password:</font><input type="password" name="password" size="20"></p>
+                            <p><input type="submit" value="submit" name="login"></p>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </body>
 </html>
