@@ -7,6 +7,10 @@
     SELECT * FROM country
 </sql:query>
 
+<sql:query var="normal_users" dataSource="jdbc/lut2">
+    SELECT uname FROM users WHERE adminrole = 0
+</sql:query>
+
 <%
 	/* check if already logined,
 	and the role is admin user */
@@ -21,7 +25,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="../lutstyle.css">
 <link rel="stylesheet" type="text/css" href="../css/admin_console.css">
 <title>LUT Admin Console</title>
 </head>
@@ -52,6 +55,25 @@
 			</select><br> <input type="submit">
 		</fieldset>
 	</form>
+	
+	<fieldset>
+		<legend>User Management</legend>
+		<c:set var="normal_user" value="${normal_users.rows[0]}" />
+		<table>
+			<tr>
+				<th>Username</th>
+				<th>Operation</th>
+			</tr>
+			<c:forEach var="normal_user" items="${normal_users.rowsByIndex}">
+				<tr>
+					<td><c:out value="${normal_user[0]}" /></td>
+					<td>
+						<a href='manage_user.jsp?uname=<c:out value="${normal_user[0]}" />' >Manage</a>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</fieldset>
 
 </body>
 </html>
