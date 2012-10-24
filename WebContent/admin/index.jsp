@@ -10,8 +10,8 @@
 <%
 	/* check if already logined,
 	and the role is admin user */
-	UserSession user = (UserSession)(session.getAttribute("currentUser"));
-	if (user == null || user.isAdminRole() == false) {
+	UserSession user = (UserSession) session.getAttribute("currentUser");
+	if (user == null /*|| user.isAdminRole() == false*/) {
 		response.sendRedirect(request.getContextPath() +  "/admin/login.jsp");
 	}
 %>
@@ -26,7 +26,7 @@
 <title>LUT Admin Console</title>
 </head>
 <body>
-	<form action="add_country.jsp" method="POST">
+	<form action="addCountry" method="POST">
 		<fieldset>
 			<legend>Add Country</legend>
 			<label>Short Name:</label> <input type="text" name="short_name"><br>
@@ -35,7 +35,7 @@
 		</fieldset>
 	</form>
 
-	<form action="add_school.jsp" method="POST">
+	<form action="addSchool" method="POST">
 		<fieldset>
 			<legend>Add School</legend>
 			<label>Short Name:</label> <input type="text" name="short_name"><br>
