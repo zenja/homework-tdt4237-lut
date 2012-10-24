@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sun.appserv.jdbc.DataSource;
 
@@ -29,6 +30,17 @@ public class AddCountryServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		/*
+		 * only admin user can use this servlet
+		 */
+		HttpSession session = request.getSession();
+		if (SecurityHelper.isAdminLoggedIn(session) == false) {
+			String destination  ="/admin/login.jsp";
+			request.getRequestDispatcher(destination).forward(request, response);
+			return;
+		}
+		
 		String shortName = request.getParameter("short_name");
 		String fullName = request.getParameter("full_name");
 		
