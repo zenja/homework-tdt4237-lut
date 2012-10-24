@@ -1,9 +1,20 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%@page import="core.UserSession" %>
+
 <sql:query var="countries" dataSource="jdbc/lut2">
     SELECT * FROM country
 </sql:query>
+
+<%
+	/* check if already logined,
+	and the role is admin user */
+	UserSession user = (UserSession)(session.getAttribute("currentUser"));
+	if (user == null || user.isAdminRole() == false) {
+		response.sendRedirect(request.getContextPath() +  "/admin/login.jsp");
+	}
+%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
