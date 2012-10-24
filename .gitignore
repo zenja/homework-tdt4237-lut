@@ -15,3 +15,6 @@ config/_*
 
 # test data
 /test-data
+
+# hidden files
+.*
