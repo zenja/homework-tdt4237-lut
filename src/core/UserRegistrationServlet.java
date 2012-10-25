@@ -57,7 +57,7 @@ public class UserRegistrationServlet extends HttpServlet {
 			pattern = Pattern.compile(EMAIL_PATTERN);
 			matcher = pattern.matcher(username);
 			if (!matcher.matches()) {
-				request.getRequestDispatcher("index.jsp").forward(request,
+				request.getRequestDispatcher("wrongEmail.jsp").forward(request,
 						response);
 				return;
 			}

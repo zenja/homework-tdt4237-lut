@@ -80,45 +80,44 @@
 			</tr>
 		</tbody>
 	</table>
-	<br />
+	<a href="requestQuestion.jsp">Forgot password?<a> <br />
 
-	<h1>User Registration</h1>
-	<table border="0">
-		<thead>
-			<tr>
-				<th>add new user</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					<form method="post" action="UserRegistrationServlet">
-						<p>
-							Username:</font><input type="text" name="username_j" size="20">
-						</p>
-						<p>
-							Password:</font><input type="password" name="password_j" size="20">
-						</p>
-						<p>
-							Security Question:</font><input type="text" name="question" size="20">
-						</p>
-						<p>
-							Answer:</font><input type="text" name="answer" size="20">
-						</p>
-						<p>
-							<input type="submit" value="submit" name="login">
-						</p>
-					</form>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<%
-		out.print("<p>Not logged in</p>");
-		} else if (user.isLoggedIn()) {
-			out.print("<p>Logged in as " + user.getUsername() + "</p>");
-			out.print("<a href=logout.jsp>logout</a>");
-		}
-	%>
+			<h1>User Registration</h1>
+			<table border="0">
+				<thead>
+					<tr>
+						<th>add new user</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<form method="post" action="UserRegistrationServlet">
+								<p>
+									Username:</font><input type="text" name="username_j" size="20">
+								</p>
+								<p>
+									Password:</font><input type="password" name="password_j" size="20">
+								</p>
+								<p>
+									Security Question:</font><input type="text" name="question" size="20">
+								</p>
+								<p>
+									Answer:</font><input type="text" name="answer" size="20">
+								</p>
+								<p>
+									<input type="submit" value="submit" name="login">
+								</p>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table> <%
+ 	out.print("<p>Not logged in</p>");
+ 	} else if (user.isLoggedIn()) {
+ 		out.print("<p>Logged in as " + user.getUsername() + "</p>");
+ 		out.print("<a href=logout.jsp>logout</a>");
+ 	}
+ %>
 </body>
 </html>

@@ -47,7 +47,9 @@ public class UserLoginServlet extends HttpServlet {
 		try{	    
 		     UserSession user = new UserSession();
 		     user.setUsername(request.getParameter("username_j"));
+		     System.out.println("test1 " + request.getParameter("username_j"));
 		     user.setPassword(request.getParameter("password_j"));
+		     System.out.println("test1 " + request.getParameter("password_j"));
 		     user = UserConnection.login(user);
 //		     System.out.println(request.getParameter("username_j"));
 //		     System.out.println(request.getParameter("password_j"));
@@ -62,8 +64,9 @@ public class UserLoginServlet extends HttpServlet {
 		    	 user = UserConnection.getQuestion(user);
 		    	 if (!user.getQuestion().isEmpty()) {
 		    		 session.setAttribute("currentUser", user);
-		    		 response.sendRedirect("resetPassword.jsp");  
-			    	 //request.getRequestDispatcher("resetPassword.jsp").forward(request, response);					
+//		    		 response.sendRedirect("resetPassword.jsp");  
+			    	 request.getRequestDispatcher("resetPassword.jsp").forward(request, response);		
+//			    	 request.getRequestDispatcher("incorrectPassword.jsp").forward(request, response);				
 				} else {
 			    	 request.getRequestDispatcher("incorrectPassword.jsp").forward(request, response);	
 				}

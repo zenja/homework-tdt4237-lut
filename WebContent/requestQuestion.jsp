@@ -19,9 +19,6 @@
 <title>Login page</title>
 </head>
 <body>
-	<h1>Username or/and Password incorrect</h1>
-	<a href="index.jsp">Try again</a>
-	<h1>Reset Password</h1>
 	<table border="0">
 		<thead>
 			<tr>
@@ -31,26 +28,9 @@
 		<tbody>
 			<tr>
 				<td>
-					<form method="post" action="ResetPasswordServlet">
+					<form method="post" action="UserLoginServlet">
 						<p>
-							Username: </font>
-							<%
-								out.print(user.getUsername());
-							%>
-						</p>
-						<input type="hidden" name="username_j"
-							value=<%out.print('"' + user.getUsername() + '"');%> />
-						<p>
-							New Password:</font><input type="password" name="password_j" size="20">
-						</p>
-						<p>
-							Security Question:</font>
-							<%
-								out.print(user.getQuestion());
-							%>
-						</p>
-						<p>
-							Answer:</font><input type="text" name="answer" size="20">
+							Username:</font><input type="text" name="username_j" size="20">
 						</p>
 						<p>
 							<input type="submit" value="submit" name="login">

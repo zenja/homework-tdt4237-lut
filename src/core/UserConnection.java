@@ -1,18 +1,43 @@
 package core;
-import java.sql.*;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import javax.naming.InitialContext;
+
 import com.sun.appserv.jdbc.DataSource;
 
 public class UserConnection {
 
 	static Connection connection = null;
 	static ResultSet resultSet = null;
+	
+	static MessageDigest md = null;
 
 	public static UserSession login(UserSession session) {
 		PreparedStatement pst = null;
 		String username = session.getUsername();
 		String password = session.getPassword();
-
+		if (username == null || password == null) {
+			session.setLoggedIn(false);
+			return session;
+		}
+		try {
+			md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes("iso-8859-1"), 0, password.length());
+		} catch (NoSuchAlgorithmException e1) {
+			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		byte[] md5hash = new byte[32];
+		md5hash = md.digest();
+		password = convertToHex(md5hash);
+		
 		try {
 			// connect
 			connection = createConnection();
@@ -83,6 +108,20 @@ public class UserConnection {
 		String answer = session.getAnswer();
 
 		try {
+			md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes("iso-8859-1"), 0, password.length());
+		} catch (NoSuchAlgorithmException e1) {
+			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		byte[] md5hash = new byte[32];
+		md5hash = md.digest();
+		password = convertToHex(md5hash);
+		System.out.println("hashed: " + password);
+
+		try {
 			// connect
 			connection = createConnection();
 			// execute
@@ -126,6 +165,19 @@ public class UserConnection {
 		String username = session.getUsername();
 		String password = session.getPassword();
 		String answer = session.getAnswer();
+		
+		try {
+			md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes("iso-8859-1"), 0, password.length());
+		} catch (NoSuchAlgorithmException e1) {
+			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		byte[] md5hash = new byte[32];
+		md5hash = md.digest();
+		password = convertToHex(md5hash);
 
 		try {
 			// connect
@@ -160,4 +212,20 @@ public class UserConnection {
 		}
 		return session;
 	}
+	
+	private static String convertToHex(byte[] data) { 
+        StringBuffer buf = new StringBuffer();
+        for (int i = 0; i < data.length; i++) { 
+            int halfbyte = (data[i] >>> 4) & 0x0F;
+            int two_halfs = 0;
+            do { 
+                if ((0 <= halfbyte) && (halfbyte <= 9)) 
+                    buf.append((char) ('0' + halfbyte));
+                else 
+                    buf.append((char) ('a' + (halfbyte - 10)));
+                halfbyte = data[i] & 0x0F;
+            } while(two_halfs++ < 1);
+        } 
+        return buf.toString();
+    } 
 }
