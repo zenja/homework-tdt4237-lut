@@ -15,7 +15,7 @@
 	/* check if already logined,
 	and the role is admin user */
 	UserSession user = (UserSession) session.getAttribute("currentUser");
-	if (user == null /*|| user.isAdminRole() == false*/) {
+	if (user == null || user.isAdminRole() == false) {
 		response.sendRedirect(request.getContextPath() +  "/admin/login.jsp");
 	}
 %>
