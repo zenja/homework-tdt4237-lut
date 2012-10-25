@@ -86,7 +86,7 @@
 	<table border="0">
 		<thead>
 			<tr>
-				<th>registrate user</th>
+				<th>add new user</th>
 			</tr>
 		</thead>
 		<tbody>
