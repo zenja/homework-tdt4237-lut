@@ -2,6 +2,8 @@ package core;
 
 
 import java.io.IOException;
+import java.util.Enumeration;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpMethodConstraint;
 import javax.servlet.annotation.ServletSecurity;
@@ -44,7 +46,7 @@ public class UserLoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try{	    
+		try{
 		     UserSession user = new UserSession();
 		     user.setUsername(request.getParameter("username_j"));
 		     System.out.println("test1 " + request.getParameter("username_j"));
@@ -58,7 +60,11 @@ public class UserLoginServlet extends HttpServlet {
 		     if (user.isLoggedIn()){
 		          session.setMaxInactiveInterval(60*60); // one hour
 		          session.setAttribute("currentUser",user); 
-		          response.sendRedirect("index.jsp");    		
+		          if (request.getHeader("referer").endsWith("admin/login.jsp")) {
+		        	  response.sendRedirect("admin");
+				} else {
+					response.sendRedirect(request.getHeader("referer")); // send back where you came from	
+				}
 		     }       
 		     else{
 		    	 user = UserConnection.getQuestion(user);
@@ -69,6 +75,7 @@ public class UserLoginServlet extends HttpServlet {
 //			    	 request.getRequestDispatcher("incorrectPassword.jsp").forward(request, response);				
 				} else {
 			    	 request.getRequestDispatcher("incorrectPassword.jsp").forward(request, response);	
+			    	 request.getQueryString();
 				}
 		     }
 		}catch (Exception e){
