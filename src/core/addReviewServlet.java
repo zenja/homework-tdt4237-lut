@@ -18,9 +18,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sun.appserv.jdbc.DataSource;
 import com.sun.corba.se.impl.util.Version;
+
+import core.utils.SecurityHelper;
 
 /**
  * Servlet implementation class addReviewServlet
@@ -55,9 +58,16 @@ public class addReviewServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		try {
+			
+			HttpSession session = request.getSession();
+			UserSession user = (UserSession)session.getAttribute("currentUser");
+			if (!user.isLoggedIn()) {
+				request.getRequestDispatcher("/add_review.jsp").forward(request,
+						response);
+			}
 
 			String school_id = request.getParameter("school_id");
-			String name = request.getParameter("name");
+			String name = user.getUsername();
 			String review = request.getParameter("review");
 			
 			InitialContext context = new InitialContext();
