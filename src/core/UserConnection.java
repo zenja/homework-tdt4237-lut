@@ -24,6 +24,7 @@ public class UserConnection {
 			resultSet = pst.executeQuery();
 			// check result
 			if(resultSet.next()){
+				session.setAdminRole(resultSet.getBoolean("adminrole"));
 				session.setLoggedIn(true);
 			} else {
 				session.setLoggedIn(false);

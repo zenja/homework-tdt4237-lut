@@ -43,7 +43,7 @@ public class UserRegistrationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try{	    
+		try{
 		     UserSession user = new UserSession();
 		     user.setUsername(request.getParameter("username_j"));
 		     user.setPassword(request.getParameter("password_j"));
@@ -55,7 +55,6 @@ public class UserRegistrationServlet extends HttpServlet {
 //		     System.out.println(user.isLoggedIn());
 		     
 		     if (user.isLoggedIn()){
-		    	 System.out.println();
 		          HttpSession session = request.getSession(true);
 		          session.setMaxInactiveInterval(60*60); // one hour
 		          session.setAttribute("currentUser",user); 

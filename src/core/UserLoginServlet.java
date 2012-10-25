@@ -47,7 +47,7 @@ public class UserLoginServlet extends HttpServlet {
 		try{	    
 		     UserSession user = new UserSession();
 		     user.setUsername(request.getParameter("username_j"));
-		     user.setPassword(request.getParameter("password_j"));		
+		     user.setPassword(request.getParameter("password_j"));
 		     user = UserConnection.login(user);
 //		     System.out.println(request.getParameter("username_j"));
 //		     System.out.println(request.getParameter("password_j"));
