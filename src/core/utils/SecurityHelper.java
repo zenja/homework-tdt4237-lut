@@ -22,7 +22,7 @@ public class SecurityHelper {
 	
 	public static boolean isAdminLoggedIn(HttpSession session) {
 		UserSession user = (UserSession)session.getAttribute("currentUser");
-		if (user == null /*|| user.isAdminRole() == false*/) {
+		if (user == null || user.isAdminRole() == false) {
 			return false;
 		} else {
 			return true;
